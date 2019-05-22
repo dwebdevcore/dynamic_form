@@ -1,0 +1,109 @@
+#quick-panel {
+
+    .activity-tab {
+
+        .friends {
+
+            .friend {
+                position: relative;
+
+                .status {
+                    position: absolute;
+                    top: 8px;
+                    left: 44px;
+                    width: 18px;
+                    height: 18px;
+                    z-index: 10;
+                    border-radius: 50%;
+                    border: 3px solid #FFFFFF;
+
+                    &.online {
+                        background-color: #00C853;
+                    }
+
+                    &.offline {
+                        background-color: #D50000;
+                    }
+
+                    &.away {
+                        background-color: #FF6D00;
+                    }
+                }
+
+                .unread-message-count {
+                    position: absolute;
+                    left: 16px;
+                    bottom: 16px;
+                    width: 18px;
+                    height: 18px;
+                    z-index: 10;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 18px;
+                    font-size: 11px;
+                }
+            }
+        }
+
+        .servers {
+
+            .server {
+
+                .status {
+                    margin: 24px 20px 28px 8px;
+
+                    &.normal {
+                        color: #00C853;
+                    }
+
+                    &.warn {
+                        color: #D50000;
+                    }
+
+                    &.error {
+                        color: #FF6D00;
+                    }
+                }
+            }
+        }
+
+        .stat {
+
+            md-progress-linear {
+
+                &.normal {
+
+                    .md-bar {
+                        background-color: #00C853;
+                    }
+
+                    .md-container {
+                        background-color: rgba(0, 200, 83, 0.3);
+                    }
+                }
+
+                &.warn {
+
+                    .md-bar {
+                        background-color: #FF6D00;
+                    }
+
+                    .md-container {
+                        background-color: rgba(255, 109, 0, 0.3);
+                    }
+                }
+
+                &.alert {
+
+                    .md-bar {
+                        background-color: #D50000;
+                    }
+
+                    .md-container {
+                        background-color: rgba(213, 0, 0, 0.3);
+                    }
+                }
+            }
+        }
+    }
+}

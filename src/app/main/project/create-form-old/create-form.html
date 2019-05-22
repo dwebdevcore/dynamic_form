@@ -1,0 +1,121 @@
+<div class="page-layout simple fullwidth">
+    <div class="header md-accent-bg layout-align-space-between-stretch layout-row" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start" class="layout-align-center-start layout-column">
+            <div class="breadcrumb layout-align-start-center layout-row" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16 md-default-theme md-font material-icons icon-home" role="img"
+                    aria-label="icon-home"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator md-default-theme md-font material-icons icon-chevron-right"
+                    role="img" aria-label="icon-chevron-right"></md-icon><span class="parent">Create form</span>
+            </div>
+            <div class="title">Create form</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <form novalidate name="nameForm">
+            <div layout="row">
+
+                <md-input-container flex="100">
+                    <label>Name</label>
+                    <input ng-model="vm.name" required>
+                </md-input-container>
+
+            </div>
+        </form>
+        <div layout="row">
+            <ms-form-wizard flex>
+                <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" md-center-tabs="true">
+                    <md-tab>
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="!vm.formValid(configuration.form1, wizardStep1)">1</span>
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="vm.formValid(configuration.form1, wizardStep1)">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                                <span class="ms-form-wizard-step-text">Form 1</span>
+                            </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
+                                <md-input-container>
+                                    <label>Form name</label>
+                                    <input ng-model="configuration.form1.name" required>
+                                </md-input-container>
+                                <form-builder ng-model="configuration.form1.data">
+
+                                </form-builder>
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab ng-disabled="!vm.formValid(configuration.form1, wizardStep1)">
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="!vm.formValid(configuration.form2, wizardStep2)">2</span>
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="vm.formValid(configuration.form2, wizardStep2)">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                                <span class="ms-form-wizard-step-text">Form 2</span>
+                            </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <form name="wizardStep2" ms-form-wizard-form novalidate>
+                                <md-input-container>
+                                    <label>Form name</label>
+                                    <input ng-model="configuration.form2.name" required>
+                                </md-input-container>
+                                <form-builder ng-model="configuration.form2.data">
+
+                                </form-builder>
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab ng-disabled="!vm.formValid(configuration.form1, wizardStep1) || !vm.formValid(configuration.form2, wizardStep2)">
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="!vm.formValid(configuration.form3, wizardStep3)">3</span>
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="vm.formValid(configuration.form3, wizardStep3  )">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                                <span class="ms-form-wizard-step-text">Form 3</span>
+                            </span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <form name="wizardStep3" ms-form-wizard-form novalidate>
+                                <md-input-container>
+                                    <label>Form name</label>
+                                    <input ng-model="configuration.form3.name" required>
+                                </md-input-container>
+                                <form-builder ng-model="configuration.form3.data">
+
+                                </form-builder>
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+
+                <div class="navigation" flex layout="row" layout-align="center center">
+                    <md-button class="md-raised md-accent" ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep()">
+                        Previous
+                    </md-button>
+                    <div class="steps">
+                        <span ng-repeat="form in msWizard.forms" ng-class="{'selected md-accent-bg':msWizard.selectedIndex === $index}"></span>
+                    </div>
+                    <md-button class="md-raised md-accent" ng-click="msWizard.nextStep()" ng-hide="msWizard.isLastStep()"
+                        ng-disabled="msWizard.currentStepInvalid()">
+                        Next
+                    </md-button>
+                    <md-button class="md-raised md-green-300-bg" ng-click="vm.save(configuration);" ng-show="msWizard.isLastStep()"
+                        ng-disabled="msWizard.formsIncomplete() || nameForm.$invalid">
+                        Save
+                    </md-button>
+                </div>
+
+            </ms-form-wizard>
+
+        </div>
+    </div>
+</div>

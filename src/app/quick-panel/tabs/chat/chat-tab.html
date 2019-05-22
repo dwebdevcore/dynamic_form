@@ -1,0 +1,95 @@
+<div class="main animate-slide-left" ng-hide="vm.chatActive">
+    <md-list class="recent">
+        <md-subheader class="md-no-sticky">
+            <span translate="QUICKPANEL.RECENT">Recent</span>
+        </md-subheader>
+
+        <md-list-item class="contact md-3-line" ng-repeat="contact in vm.contacts.recent"
+                      ng-click="vm.toggleChat(contact)">
+            <img ng-src="{{contact.avatar}}" class="md-avatar" alt="{{contact.name}}"/>
+
+            <div class="status  {{contact.status}}"></div>
+
+            <div ng-if="contact.unread" class="md-accent-bg unread-message-count">{{contact.unread}}</div>
+
+            <div class="md-list-item-text">
+                <h3>{{contact.name}}</h3>
+                <p class="last-message">{{contact.lastMessage}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+
+    <md-divider></md-divider>
+
+    <md-list class="all">
+        <md-subheader class="md-no-sticky">
+            <span translate="QUICKPANEL.START_NEW_CHAT">Start New Chat</span>
+        </md-subheader>
+
+        <md-list-item class="contact" ng-repeat="contact in vm.contacts.all" ng-click="vm.toggleChat(contact)">
+            <img ng-src="{{contact.avatar}}" class="md-avatar" alt="{{contact.name}}"/>
+
+            <div class="status {{contact.status}}"></div>
+
+            <div class="md-list-item-text">
+                <h3>{{contact.name}}</h3>
+            </div>
+        </md-list-item>
+    </md-list>
+
+    <md-divider></md-divider>
+</div>
+
+<div class="chat animate-slide-right" ng-show="vm.chatActive" layout="column">
+    <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+
+            <div layout="row" layout-align="start center">
+                <md-button class="md-icon-button" ng-click="vm.toggleChat()" aria-label="Back" translate
+                           translate-attr-aria-label="QUICKPANEL.BACK">
+                    <md-icon md-font-icon="icon-keyboard-backspace"></md-icon>
+                </md-button>
+                <h4>
+                    <span>{{vm.chat.contact.name}}</span>
+                </h4>
+            </div>
+
+            <div layout="row" layout-align="end center">
+                <md-button class="md-icon-button" aria-label="Call" translate
+                           translate-attr-aria-label="QUICKPANEL.CALL">
+                    <md-icon md-font-icon="icon-phone"></md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" aria-label="More" translate
+                           translate-attr-aria-label="QUICKPANEL.MORE">
+                    <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                </md-button>
+            </div>
+        </div>
+
+    </md-toolbar>
+    <md-content flex layout-paddings ms-scroll id="chat-dialog">
+        <div layout="row" ng-repeat="dialog in vm.chat.contact.dialog" class="md-padding message-row"
+             ng-class="dialog.who">
+            <img ng-if="dialog.who ==='contact'" ng-src="{{vm.chat.contact.avatar}}" class="avatar"
+                 alt="{{vm.chat.contact.name}}"/>
+            <img ng-if="dialog.who ==='user'" class="avatar" src="assets/images/avatars/profile.jpg">
+
+            <div class="bubble" flex>
+                <div class="message">{{dialog.message}}</div>
+                <div class="time secondary-text">{{dialog.time}}</div>
+            </div>
+        </div>
+    </md-content>
+
+    <form ng-submit="vm.reply()" layout="row" class="reply" layout-align="start center">
+        <textarea ng-keyup="$event.keyCode == 13 ? vm.reply() : null" flex
+                  ng-model="vm.replyMessage" placeholder="Type and hit enter to send message" translate
+                  translate-attr-placeholder="QUICKPANEL.REPLY_PLACEHOLDER"></textarea>
+
+        <md-button class="md-fab md-mini" type="submit" aria-label="Send message" translate
+                   translate-attr-aria-label="QUICKPANEL.SEND_MESSAGE">
+            <md-icon md-font-icon="icon-send" class="s16"></md-icon>
+        </md-button>
+    </form>
+</div>

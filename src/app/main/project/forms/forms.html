@@ -1,0 +1,82 @@
+<div class="page-layout simple fullwidth">
+    <div class="header md-accent-bg layout-align-space-between-stretch layout-row" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start" class="layout-align-center-start layout-column">
+            <div class="breadcrumb layout-align-start-center layout-row" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16 md-default-theme md-font material-icons icon-home" role="img"
+                    aria-label="icon-home"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator md-default-theme md-font material-icons icon-chevron-right"
+                    role="img" aria-label="icon-chevron-right"></md-icon><span class="parent">Forms</span>
+            </div>
+            <div class="title">Forms</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <section layout="row" layout-sm="column" layout-align="end center" layout-margin>
+            <md-button class="md-button md-raised" ui-sref="^.create-form()">Create</md-button>
+        </section>
+
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-header">
+                                <span class="column-title">No</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-header">
+                                <span class="column-title">Form Name</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-header">
+                                <span class="column-title">URL</span>
+                            </div>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="form in vm.forms track by $index">
+                        <td>{{form.id}}</td>
+                        <td>{{form.name}}</td>
+                        <td>{{form.url}}</td>
+                        <td align="right">
+
+                            <md-menu>
+
+                                <md-button class="md-icon-button" style="min-height: 20px; height:20px;padding:0;"
+                                    aria-label="More" ng-click="vm.openMenu($mdMenu, $event)">
+                                    <i class="icon icon-dots-vertical"></i>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button>
+                                            <i class="icon icon-pencil s20" style="vertical-align: middle;"></i>
+                                            Edit
+                                        </md-button>
+
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ui-sref="^.preview-form({id: form.id})">
+                                            <i class="icon icon-eye s20" style="vertical-align: middle;"></i>
+                                            Preview
+                                        </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>
+                                            <i class="icon icon-trash s20" style="vertical-align: middle;"></i>
+                                            Remove
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </td>
+                    </tr><!-- end ngRepeat: person in vm.employees -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

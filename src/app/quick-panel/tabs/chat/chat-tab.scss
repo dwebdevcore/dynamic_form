@@ -1,0 +1,161 @@
+#quick-panel {
+
+    .chat-tab {
+
+        .main,
+        .chat {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+        }
+
+        .main {
+
+            .contact {
+                position: relative;
+
+                .status {
+                    position: absolute;
+                    top: 8px;
+                    left: 44px;
+                    width: 18px;
+                    height: 18px;
+                    border: 3px solid #FFFFFF;
+                    border-radius: 50%;
+                    z-index: 10;
+
+                    &.online {
+                        background-color: #00C853;
+                    }
+
+                    &.offline {
+                        background-color: #D50000;
+                    }
+
+                    &.away {
+                        background-color: #FF6D00;
+                    }
+                }
+
+                .unread-message-count {
+                    position: absolute;
+                    left: 16px;
+                    bottom: 16px;
+                    width: 18px;
+                    height: 18px;
+                    z-index: 10;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 18px;
+                    font-size: 11px;
+                }
+            }
+
+            .recent {
+
+                .contact {
+
+                    .status {
+                        top: 18px;
+                    }
+                }
+            }
+        }
+
+        .chat {
+            max-height: 100%;
+            overflow: hidden;
+
+            .message-row {
+
+                .bubble {
+                    position: relative;
+                    padding: 8px;
+                    background-color: rgb(236, 239, 241);
+                    border: 1px solid rgb(220, 223, 225);
+
+                    &:after,
+                    &:before {
+                        content: ' ';
+                        position: absolute;
+                        width: 0;
+                        height: 0;
+                    }
+
+                    &:after {
+                        left: -7px;
+                        right: auto;
+                        top: 0px;
+                        bottom: auto;
+                        border: 11px solid;
+                        border-color: rgb(236, 239, 241) transparent transparent transparent;
+                    }
+
+                    &:before {
+                        left: -9px;
+                        right: auto;
+                        top: -1px;
+                        bottom: auto;
+                        border: 8px solid;
+                        border-color: rgb(220, 223, 225) transparent transparent transparent;
+                    }
+
+                    .time {
+                        font-size: 11px;
+                        margin-top: 8px;
+                    }
+                }
+
+                &.contact {
+
+                    .avatar {
+                        margin: 0 16px 0 0;
+                    }
+                }
+
+                &.user {
+                    align-items: flex-end;
+
+                    .avatar {
+                        order: 2;
+                        margin: 0 0 0 16px;
+                    }
+
+                    .bubble {
+                        background-color: #E8F5E9;
+                        border: 1px solid #DFEBE0;
+                        order: 1;
+
+                        &:after {
+                            right: -7px;
+                            left: auto;
+                            top: auto;
+                            bottom: 0px;
+                            border-color: transparent transparent #E8F5E9 transparent;
+                        }
+
+                        &:before {
+                            right: -9px;
+                            left: auto;
+                            top: auto;
+                            bottom: -1px;
+                            border-color: transparent transparent #DFEBE0 transparent;
+                        }
+                    }
+                }
+            }
+
+            .reply {
+                border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+                textarea {
+                    margin: 8px;
+                    resize: none;
+                    height: 80px;
+                    padding: 8px 16px 8px 8px;
+                }
+            }
+        }
+    }
+}

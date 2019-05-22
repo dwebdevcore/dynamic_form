@@ -1,0 +1,145 @@
+.ms-form-wizard {
+    background: #FFFFFF;
+    box-shadow: $whiteframe-shadow-1dp;
+
+    md-tabs {
+
+        md-tabs-wrapper {
+            box-shadow: $whiteframe-shadow-1dp;
+
+            md-tabs-canvas {
+                height: 72px;
+
+                md-pagination-wrapper {
+                    height: 72px;
+
+                    md-tab-item {
+                        opacity: 1 !important;
+                        padding: 24px;
+
+                        &:before {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            top: 50%;
+                            left: 0;
+                            right: 50%;
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                            z-index: 8;
+                        }
+
+                        &:after {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            right: 0;
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                            z-index: 8;
+                        }
+
+                        &:first-of-type {
+
+                            &:before {
+                                display: none;
+                            }
+                        }
+
+                        &:last-of-type {
+
+                            &:after {
+                                display: none;
+                            }
+                        }
+
+                        &.md-disabled {
+
+                            .ms-form-wizard-step-label {
+
+                                .ms-form-wizard-step-number {
+                                    background: rgba(0, 0, 0, 0.12) !important;
+                                }
+                            }
+                        }
+
+                        .md-ripple-container {
+                            z-index: 11;
+                        }
+                    }
+                }
+
+                md-ink-bar {
+                    display: none !important;
+                }
+            }
+        }
+
+        md-tabs-content-wrapper {
+
+        }
+    }
+
+    .ms-form-wizard-step-label {
+        display: inline-block;
+        position: relative;
+        background: #FFFFFF;
+        z-index: 10;
+        padding: 0 16px;
+        line-height: 24px;
+
+        .ms-form-wizard-step-number {
+            display: inline-block;
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            font-size: 14px;
+            margin-right: 12px;
+            border-radius: 50%;
+            color: #FFFFFF !important;
+
+            i {
+                line-height: 24px !important;
+            }
+        }
+
+        .ms-form-wizard-step-text {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            line-height: 24px;
+        }
+    }
+
+    .ms-form-wizard-form {
+        padding: 24px 16px;
+    }
+
+    .navigation {
+        padding: 16px;
+
+        .steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+
+            span {
+                width: 5px;
+                height: 5px;
+                margin: 0 4px;
+                border-radius: 50%;
+
+                &:not(.md-accent-bg) {
+                    background: rgba(0, 0, 0, 0.12);
+                }
+
+                &.selected {
+                    width: 8px;
+                    height: 8px;
+                }
+            }
+        }
+    }
+}

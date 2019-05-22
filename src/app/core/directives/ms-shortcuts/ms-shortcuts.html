@@ -1,0 +1,81 @@
+<div class="shortcuts-container" layout="row" layout-align="space-between center" flex
+     ng-class="{'mobile-bar-active': MsShortcuts.mobileBarActive}">
+
+    <div layout="row" layout-align="start center" flex>
+        <div class="shortcuts hide show-gt-xs" layout="row" layout-align="start center" ms-scroll
+             ng-if="MsShortcuts.shortcuts.length > 0"
+             ng-sortable="MsShortcuts.sortableOptions">
+            <div ng-repeat="shortcut in MsShortcuts.shortcuts" layout="row" layout-align="center center">
+                <md-button class="md-icon-button shortcut" aria-label="{{shortcut.title}}"
+                           ui-sref="{{shortcut.uisref}}">
+                    <md-icon ng-if="shortcut.icon" md-font-icon="{{shortcut.icon}}" class="icon s24"></md-icon>
+                    <div ng-if="!shortcut.icon" class="first-letter">{{shortcut.title.charAt(0)}}</div>
+                    <md-tooltip md-direction="bottom">{{shortcut.title}}</md-tooltip>
+                </md-button>
+            </div>
+        </div>
+
+        <md-menu md-offset="8 56" class="shortcut-menu hide show-gt-xs">
+            <md-button class="md-icon-button add-shortcut-button" aria-label="Add shortcut"
+                       ng-click="$mdOpenMenu($event)">
+                <md-icon md-menu-origin md-font-icon="icon-star" class="icon amber-600-fg s24"></md-icon>
+                <md-tooltip md-direction="bottom">Click to add/remove shortcut</md-tooltip>
+            </md-button>
+
+            <md-menu-content>
+                <div id="ms-shortcut-add-menu">
+                    <div class="shortcut-search" layout="row" layout-align="start center">
+                        <div class="search-icon" layout="row" layout-align="center center"
+                             ng-if="!MsShortcuts.resultsLoading">
+                            <md-icon md-menu-align-target md-font-icon="icon-magnify" class="icon s24"></md-icon>
+                        </div>
+                        <div class="shortcut-loader" layout="row" layout-align="center center"
+                             ng-if="MsShortcuts.resultsLoading">
+                            <md-progress-circular class="md-accent" md-diameter="20" md-mode="indeterminate">
+                            </md-progress-circular>
+                        </div>
+
+                        <input type="text" placeholder="Search" flex
+                               ng-model="MsShortcuts.query"
+                               ng-model-options="MsShortcuts.queryOptions"
+                               ng-keydown="MsShortcuts.handleKeydown($event)">
+                    </div>
+
+                    <div class="results" ng-if="MsShortcuts.results" ms-scroll>
+                        <div class="no-results" ng-if="MsShortcuts.results.length === 0">No Results!</div>
+
+                        <div class="result" ng-repeat="result in MsShortcuts.results"
+                             ng-click="MsShortcuts.handleResultClick(result)"
+                             ng-mouseenter="MsShortcuts.handleMouseenter($index)"
+                             ng-mousedown="MsShortcuts.absorbEvent($event)"
+                             ng-class="{'selected': $index == MsShortcuts.selectedResultIndex}"
+                             md-prevent-menu-close="md-prevent-menu-close"
+                             md-ink-ripple>
+                            <div layout="row" layout-align="start space-between">
+                                <div layout="row" layout-align="start center" flex>
+                                    <div class="icon icon-container" layout="row" layout-align="center center">
+                                        <i ng-if="result.icon" class="{{result.icon}}"></i>
+                                        <div ng-if="!result.icon" class="square md-accent-bg"></div>
+                                    </div>
+                                    <div>
+                                        <div class="title">{{result.title}}</div>
+                                    </div>
+                                </div>
+                                <md-icon md-font-icon="icon-pin" class="icon s18"
+                                         ng-class="{'fade-text': !result.hasShortcut}"></md-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+    <md-button class="md-icon-button toggle-mobile-menu hide-gt-xs" aria-label="Add shortcut"
+               ng-click="MsShortcuts.toggleMobileBar()">
+        <md-icon md-menu-origin md-font-icon="icon-star" class="icon amber-600-fg s24"
+                 ng-hide="MsShortcuts.mobileBarActive"></md-icon>
+        <md-icon md-menu-origin md-font-icon="icon-close" class="icon s24"
+                 ng-hide="!MsShortcuts.mobileBarActive"></md-icon>
+    </md-button>
+</div>

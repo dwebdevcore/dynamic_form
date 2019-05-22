@@ -1,0 +1,85 @@
+<div class="page-layout simple fullwidth">
+    <div class="header md-accent-bg layout-align-space-between-stretch layout-row" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start" class="layout-align-center-start layout-column">
+            <div class="breadcrumb layout-align-start-center layout-row" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16 md-default-theme md-font material-icons icon-home" role="img"
+                    aria-label="icon-home"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator md-default-theme md-font material-icons icon-chevron-right"
+                    role="img" aria-label="icon-chevron-right"></md-icon><span class="parent">Preview form</span>
+            </div>
+            <div class="title">Preview form - {{vm.configuration.name}}</div>
+        </div>
+    </div>
+
+    <div class="content">
+        
+        <div layout="row">
+            <ms-form-wizard flex>
+                <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" md-center-tabs="true">
+                    <md-tab>
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg">1</span>                                
+                                <span class="ms-form-wizard-step-text">{{vm.configuration.form1.name}}</span>
+                            </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <form-render form-data="vm.configuration.form1.data">
+
+                            </form-render>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab>
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg">2</span>                                
+                                <span class="ms-form-wizard-step-text">{{vm.configuration.form2.name}}</span>
+                            </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <form-render form-data="vm.configuration.form2.data">
+
+                            </form-render>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab >
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg">3</span>                                
+                                <span class="ms-form-wizard-step-text">{{vm.configuration.form3.name}}</span>
+                            </span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <form-render form-data="vm.configuration.form3.data">
+
+                            </form-render>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+
+                <div class="navigation" flex layout="row" layout-align="center center">
+                    <md-button class="md-raised md-accent" ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep()">
+                        Previous
+                    </md-button>
+                    <div class="steps">
+                        <span ng-repeat="form in msWizard.forms" ng-class="{'selected md-accent-bg':msWizard.selectedIndex === $index}"></span>
+                    </div>
+                    <md-button class="md-raised md-accent" ng-click="msWizard.nextStep()" ng-hide="msWizard.isLastStep()"
+                        ng-disabled="msWizard.currentStepInvalid()">
+                        Next
+                    </md-button>
+                    <md-button class="md-raised md-green-300-bg" ng-click="vm.save(configuration);" ng-show="msWizard.isLastStep()"
+                        ng-disabled="msWizard.formsIncomplete() || nameForm.$invalid">
+                        Save
+                    </md-button>
+                </div>
+
+            </ms-form-wizard>
+
+        </div>
+    </div>
+</div>

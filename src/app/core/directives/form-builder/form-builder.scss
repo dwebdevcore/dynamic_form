@@ -1,0 +1,11 @@
+form-builder {
+
+    [class^="icon-"]:before,
+    [class*=" icon-"]:before {
+        font-family: form-builder-font !important;
+        margin-right: .2em !important;
+        margin-left: .2em !important;
+    }
+
+    
+}

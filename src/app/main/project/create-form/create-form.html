@@ -1,0 +1,200 @@
+<div class="page-layout simple fullwidth">
+    <div class="header md-accent-bg layout-align-space-between-stretch layout-row" layout="row" layout-align="space-between">
+        <div layout="column" layout-align="center start" class="layout-align-center-start layout-column">
+            <div class="breadcrumb layout-align-start-center layout-row" layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-home" class="s16 md-default-theme md-font material-icons icon-home" role="img"
+                    aria-label="icon-home"></md-icon>
+                <md-icon md-font-icon="icon-chevron-right" class="s16 separator md-default-theme md-font material-icons icon-chevron-right"
+                    role="img" aria-label="icon-chevron-right"></md-icon><span class="parent">Create form</span>
+            </div>
+            <div class="title">Create form</div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div layout="row">
+            <ms-form-wizard flex>
+                <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" md-center-tabs="true">
+                    <md-tab>
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="!vm.step1Valid()">1</span>
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="vm.step1Valid()">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                                <span class="ms-form-wizard-step-text">Pick form fields</span>
+                            </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
+                                <span class="md-title">Pick form fields</span>
+                                <p>Select the fields that you'd like to display on your user enrollment form and how to
+                                    style each field.</p>
+                                <!-- <div layout="row" layout-sm="column" layout-align="space-between center" layout-wrap>
+                                    <div flex="25" flex-sm="100" ng-repeat="item in vm.inputOptions">
+                                        <md-checkbox ng-model="item.checked">
+                                            {{ item.name }}
+                                        </md-checkbox>
+                                    </div>
+                                </div> -->
+
+
+
+                                <div class="bootstrap-wrapper">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="item in vm.inputOptions">
+                                            <md-checkbox ng-model="item.checked">
+                                                {{ item.name }}
+                                            </md-checkbox>
+                                        </div>
+                                    </div>
+
+                                    <div class="padding-top-30">
+                                        <label class="control-label">Paste CSS to apply to form here</label>
+                                        <textarea ng-model="configuration.styles" class="form-control height-250"
+                                            placeholder="Paste CSS here..."></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab ng-disabled="!vm.step1Valid()">
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$invalid">2</span>
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$valid">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                                <span class="ms-form-wizard-step-text">Set user handling</span>
+                            </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+
+                            <form name="wizardStep2" ms-form-wizard-form novalidate>
+                                <span class="md-title">Set user handling</span>
+                                <p>Tell us how to handle accepted vs. rejected users and manual review</p>
+                                <div layout="row">
+                                    <md-input-container flex="65">
+                                        <label>URL to send Accepted users to (your Assertion Consumer Service URL)</label>
+                                        <input required name="acceptedUrl" ng-model="configuration.acceptedUrl"
+                                            url-valid required>
+                                        <div ng-messages="wizardStep2.acceptedUrl.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="invalidUrl">The value you entered is not a valid URL</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div layout="row">
+                                    <md-input-container flex="65">
+                                        <label>URL to send Rejected users to</label>
+                                        <input required name="rejectedUrl" ng-model="configuration.rejectedUrl"
+                                            url-valid required>
+                                        <div ng-messages="wizardStep2.rejectedUrl.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="invalidUrl">The value you entered is not a valid URL</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div layout="row">
+                                    <md-input-container flex="65">
+                                        <label>URL to send users for Manual Review</label>
+                                        <input required name="manaulReviewUrl" ng-model="configuration.manaulReviewUrl"
+                                            url-valid required>
+                                        <div ng-messages="wizardStep2.manaulReviewUrl.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="invalidUrl">The value you entered is not a valid URL</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div layout="row" layout-wrap>
+                                    <md-switch flex="100" md-invert ng-model="configuration.performVerification">
+                                        Perform Document Verification prior to Manual Review redirection
+                                    </md-switch>
+                                </div>
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab ng-disabled="!vm.step1Valid() || wizardStep2.$invalid">
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$invalid">3</span>
+                                <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$valid">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                                <span class="ms-form-wizard-step-text">Paste your Public PKI Certificate</span>
+                            </span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <form name="wizardStep3" ms-form-wizard-form novalidate>
+
+                                <span class="md-title">Paste your Public PKI Certificate</span>
+                                <p>Paste your public key for encryption and non-repudiation</p>
+
+                                <md-input-container class="md-block">
+                                    <label>Public PKI Certificate</label>
+                                    <textarea ng-model="configuration.pkiCertificate" name="pkiCertificate"
+                                        md-maxlength="500" rows="5" md-select-on-focus required></textarea>
+                                    <div ng-messages="wizardStep3.pkiCertificate.$error">
+                                        <div ng-message="required">The PKI Certificate is required</div>
+                                        <div ng-message="maxlength">The maximum characters of the key is 500</div>
+                                    </div>
+                                </md-input-container>
+
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab ng-disabled="!vm.step1Valid() || wizardStep2.$invalid || wizardStep3.$invalid">
+                        <md-tab-label>
+                            <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg">4</span>
+                                <span class="ms-form-wizard-step-text">Get code</span>
+                            </span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <form name="wizardStep4" ms-form-wizard-form novalidate>
+                                <span class="md-title">Copy and paste your dynamic form code to your web app</span>
+                                <p>Place the following lines of code into your website where you'd like the generated
+                                    form to appear. </p>
+                                <div class="bootstrap-wrapper padding-top-30">
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="5" readonly>
+<div class="socure-form-generator"></div>
+
+<script>jQuery(function($) {$('.socure-form-generator').formBuilder();});</script>
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+
+                <div class="navigation" flex layout="row" layout-align="center center">
+                    <md-button class="md-raised md-accent" ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep()">
+                        Previous
+                    </md-button>
+                    <div class="steps">
+                        <span ng-repeat="form in msWizard.forms" ng-class="{'selected md-accent-bg':msWizard.selectedIndex === $index}"></span>
+                    </div>
+                    <md-button class="md-raised md-accent" ng-click="msWizard.nextStep()" ng-hide="msWizard.isLastStep()"
+                        ng-disabled="msWizard.currentStepInvalid()">
+                        Next
+                    </md-button>
+                    <md-button class="md-raised md-green-300-bg" ng-click="vm.save(configuration);" ng-show="msWizard.isLastStep()"
+                        ng-disabled="msWizard.formsIncomplete() || nameForm.$invalid">
+                        Save
+                    </md-button>
+                </div>
+
+            </ms-form-wizard>
+
+        </div>
+    </div>
+</div>

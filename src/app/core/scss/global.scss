@@ -1,0 +1,25 @@
+@import 'partials/reset';
+@import 'partials/variables';
+@import 'partials/mixins';
+@import 'partials/angular-material-extend';
+@import 'partials/layouts-template';
+@import 'partials/layouts-page';
+@import 'partials/animations';
+@import 'partials/colors';
+@import 'partials/icons';
+@import 'partials/material';
+@import 'partials/typography';
+
+@import 'partials/plugins/angular-google-map';
+@import 'partials/plugins/angular-moment-picker';
+@import 'partials/plugins/c3';
+@import 'partials/plugins/chartist';
+@import 'partials/plugins/chartjs';
+@import 'partials/plugins/datatable';
+@import 'partials/plugins/highlight';
+@import 'partials/plugins/nvd3';
+@import 'partials/plugins/perfect-scrollbar';
+@import 'partials/plugins/text-angular';
+
+@import 'partials/helpers';
+@import 'partials/print';

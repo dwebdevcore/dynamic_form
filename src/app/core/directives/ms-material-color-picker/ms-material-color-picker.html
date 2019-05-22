@@ -1,0 +1,67 @@
+<md-menu md-position-mode="target-right target">
+
+    <div ng-click="$mdOpenMenu($event)">
+        <ms-color-picker-button>
+            <md-button aria-label="Row Color" md-menu-origin
+                       ng-click="$mdOpenMenu($event)" ng-class="vm.selectedColor.class">
+
+                <span ng-show="vm.selectedColor.palette">
+                    {{vm.selectedColor.palette}} {{vm.selectedColor.hue}}
+                </span>
+                <span ng-show="!vm.selectedColor.palette">
+                    Select Color
+                </span>
+            </md-button>
+        </ms-color-picker-button>
+    </div>
+
+    <md-menu-content class="ms-material-color-picker-menu-content" layout-column>
+
+        <header ng-class="vm.selectedColor.class || 'md-accent-bg'" class="md-whiteframe-4dp" layout="row"
+                layout-align="space-between center">
+            <md-button md-prevent-menu-close ng-click="vm.activateHueSelection(false,false)"
+                       class="md-icon-button" ng-class="{'hidden':!vm.selectedPalette}" aria-label="Palette">
+                <md-icon md-font-icon="icon-arrow-left" class="s20"></md-icon>
+            </md-button>
+
+            <span ng-if="vm.selectedColor.palette">
+                {{vm.selectedColor.palette}} {{vm.selectedColor.hue}}
+            </span>
+
+            <span ng-if="!vm.selectedColor.palette">
+                Select Color
+            </span>
+
+            <md-button class="remove-color-button md-icon-button" ng-click="vm.removeColor()" aria-label="Remove Color">
+                <md-icon md-font-icon="icon-delete" class="s20"></md-icon>
+            </md-button>
+        </header>
+
+        <div class="colors" ms-scroll>
+            <div ng-show="!vm.selectedPalette" layout="row" layout-wrap>
+                <div class="color" ng-class="'md-'+palette+'-500-bg'"
+                     ng-repeat="(palette, hues) in vm.palettes" ng-click="vm.activateHueSelection(palette,hues)"
+                     layout="row" layout-align="start end" md-prevent-menu-close md-ink-ripple>
+                    <span class="label">
+                        {{palette}}
+                    </span>
+                </div>
+            </div>
+
+            <div ng-show="vm.selectedPalette" layout="row" layout-wrap>
+                <div class="color" ng-class="'md-'+vm.selectedPalette+'-'+hue+'-bg'"
+                     ng-repeat="(hue, values) in vm.selectedHues" ng-click="vm.selectColor(vm.selectedPalette,hue)"
+                     layout="row" layout-align="start end" md-ink-ripple>
+                    <span class="label">
+                        {{hue}}
+                    </span>
+                    <i ng-if="vm.selectedPalette == vm.selectedColor.palette && hue == vm.selectedColor.hue"
+                       class="s16 icon-check">
+                    </i>
+                </div>
+            </div>
+
+        </div>
+
+    </md-menu-content>
+</md-menu>

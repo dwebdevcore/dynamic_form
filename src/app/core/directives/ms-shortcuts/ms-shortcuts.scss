@@ -1,0 +1,158 @@
+/*----------------------------------------------------------------*/
+/*  ms-shortcuts
+/*----------------------------------------------------------------*/
+.ms-shortcuts {
+    height: $toolbarHeight;
+    font-size: 13px;
+
+    .shortcuts-container {
+        height: $toolbarHeight;
+        padding: 0 8px;
+        max-width: 400px;
+
+        .shortcuts {
+            position: relative;
+            overflow-x: scroll;
+
+            > div {
+                height: $toolbarHeight;
+                min-width: 44px;
+
+                &.dragging {
+                    cursor: grabbing;
+
+                    .md-ripple-container {
+                        display: none;
+                    }
+                }
+
+                &.ghost {
+
+                    .shortcut {
+                        opacity: 0.27;
+                    }
+                }
+
+                .shortcut {
+                    margin: 2px;
+
+                    .first-letter {
+                        display: inline-block;
+                        vertical-align: middle;
+                        font-size: 20px;
+                        text-transform: uppercase;
+                        color: rgba(0, 0, 0, 0.54);
+                    }
+                }
+            }
+        }
+
+        .shortcut-menu {
+            margin: 0;
+        }
+
+        &.mobile-bar-active {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #FFFFFF;
+            z-index: 99;
+            max-width: none !important;
+
+            .shortcuts,
+            .shortcut-menu,
+            .toggle-mobile-menu {
+                display: flex !important;
+            }
+
+            .toggle-mobile-menu {
+                margin-left: 14px;
+                min-width: 40px;
+            }
+
+            > div {
+                border-right: 1px solid rgba(0, 0, 0, 0.12);
+            }
+        }
+    }
+}
+
+#ms-shortcut-add-menu {
+    position: relative;
+    width: 240px;
+    min-width: 240px;
+    max-width: 240px;
+
+    .add-shortcut-button {
+        width: 48px;
+        height: 48px;
+        padding: 0 12px;
+        margin: 0;
+    }
+
+    .shortcut-search {
+        height: 45px;
+        padding: 0 8px;
+
+        .search-icon {
+            width: 40px;
+            height: 40px;
+            line-height: 48px;
+        }
+
+        .shortcut-loader {
+            padding: 10px;
+        }
+
+        input {
+            padding: 8px;
+        }
+    }
+
+    .results {
+        position: relative;
+        overflow-y: scroll;
+        max-height: 233px;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+        .no-results {
+            font-size: 18px;
+            padding: 16px;
+            color: rgba(0, 0, 0, 0.54);
+        }
+
+        .result {
+            position: relative;
+            min-height: 56px;
+            padding: 16px;
+            cursor: pointer;
+
+            &.selected {
+                background: rgba(0, 0, 0, 0.07);
+            }
+
+            .icon-container {
+                min-width: 32px;
+                margin-right: 8px;
+
+                .square {
+                    width: 6px;
+                    height: 6px;
+                }
+            }
+
+            .title {
+                font-size: 16px;
+            }
+
+            .description {
+                padding-top: 6px;
+                font-size: 14px;
+            }
+        }
+    }
+}

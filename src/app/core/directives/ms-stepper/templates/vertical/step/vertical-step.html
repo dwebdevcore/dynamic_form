@@ -1,0 +1,48 @@
+<md-button class="ms-stepper-navigation-item"
+           ng-class="{'current': MsStepper.isStepCurrent(stepInfo.stepNumber), 'valid': MsStepper.isStepValid(stepInfo.stepNumber), 'disabled': MsStepper.isStepDisabled(stepInfo.stepNumber), 'optional': MsStepper.isStepOptional(stepInfo.stepNumber)}"
+           ng-click="MsStepper.gotoStep(stepInfo.stepNumber)"
+           ng-disabled="MsStepper.isStepDisabled(stepInfo.stepNumber)"
+           ng-hide="MsStepper.isStepHidden(stepInfo.stepNumber)"
+           aria-label="Stepper navigation button"
+           layout="row" layout-align="start center">
+
+    <div class="step" layout="row" layout-align="center center">
+        <span ng-if="!MsStepper.isStepValid(stepInfo.stepNumber) || MsStepper.isStepOptional(stepInfo.stepNumber)">
+            <i class="icon icon-checkbox-blank-circle-outline s18 md-accent-fg"></i>
+        </span>
+        <span ng-if="MsStepper.isStepValid(stepInfo.stepNumber) && !MsStepper.isStepOptional(stepInfo.stepNumber)">
+            <i class="icon icon-check-circle s18 md-accent-fg"></i>
+        </span>
+    </div>
+
+    <div layout="column" layout-align="start start">
+        <div class="title" ng-if="stepInfo.stepTitleTranslate">{{stepInfo.stepTitleTranslate | translate }}</div>
+        <div class="title" ng-if="!stepInfo.stepTitleTranslate">{{stepInfo.stepTitle}}</div>
+        <div class="subtitle" ng-if="MsStepper.isStepOptional(stepInfo.stepNumber)">Optional</div>
+    </div>
+</md-button>
+
+<div class="ms-stepper-step-content" ng-transclude></div>
+
+<div class="ms-stepper-controls" layout="row" layout-align="start center"
+     ng-show="MsStepper.isStepCurrent(stepInfo.stepNumber)">
+    <md-button class="md-accent md-raised"
+               ng-disabled="MsStepper.isFirstStep()"
+               ng-click="MsStepper.gotoPreviousStep()">
+        Back
+    </md-button>
+
+    <md-button class="md-accent md-raised"
+               ng-if="!MsStepper.isLastStep()"
+               ng-disabled="!MsStepper.isStepValid(MsStepper.currentStepNumber)"
+               ng-click="MsStepper.gotoNextStep()">
+        Next
+    </md-button>
+
+    <md-button type="submit" class="md-accent md-raised"
+               ng-click="MsStepper.resetForm()"
+               ng-if="MsStepper.isLastStep()"
+               ng-disabled="!MsStepper.isFormValid()">
+        Submit
+    </md-button>
+</div>

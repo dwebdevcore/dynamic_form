@@ -1,0 +1,13 @@
+textarea {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+md-switch {
+    white-space: initial;
+}
+
+form[name=wizardStep4] textarea {
+    font-weight: 700 !important;
+}

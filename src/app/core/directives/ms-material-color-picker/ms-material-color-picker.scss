@@ -1,0 +1,67 @@
+/*----------------------------------------------------------------*/
+/*  ms-material-color-picker
+/*----------------------------------------------------------------*/
+ms-material-color-picker {
+
+    md-menu {
+
+        .md-button {
+            font-size: 12px;
+        }
+    }
+}
+
+md-menu-content {
+
+    &.ms-material-color-picker-menu-content {
+        width: 208px;
+        max-width: 208px;
+        min-width: 208px;
+        padding: 0;
+        overflow: hidden;
+
+        header {
+            height: 48px;
+            text-transform: uppercase;
+
+            .md-button {
+                display: flex;
+                margin: 0;
+            }
+
+            > span {
+                line-height: 13px;
+            }
+        }
+
+        .colors {
+            position: relative;
+            width: 208px;
+            min-height: 258px;
+            height: 258px;
+            padding: 4px;
+
+            .color {
+                position: relative;
+                width: 46px;
+                height: 46px;
+                margin: 2px;
+                border-radius: 0;
+                cursor: pointer;
+
+                .label {
+                    padding: 2px;
+                    font-size: 10px;
+                }
+
+                .icon-check {
+                    position: absolute;
+                    top: 2px;
+                    right: 2px;
+                    font-size: 16px;
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+}

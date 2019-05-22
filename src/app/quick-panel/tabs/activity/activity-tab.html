@@ -1,0 +1,51 @@
+<md-list class="friends">
+    <md-subheader class="md-no-sticky">
+        <span translate="QUICKPANEL.FRIENDS">Friends</span>
+    </md-subheader>
+
+    <md-list-item class="friend md-3-line" ng-repeat="friend in vm.activities.friends">
+        <img ng-src="{{friend.avatar}}" class="md-avatar" alt="{{friend.name}}"/>
+
+        <div class="status {{friend.status}}"></div>
+
+        <div ng-if="contact.unread" class="md-accent-bg unread-message-count">{{contact.unread}}</div>
+
+        <div class="md-list-item-text">
+            <h3 class="message">{{friend.message}}</h3>
+            <p class="time">{{friend.time}}</p>
+        </div>
+    </md-list-item>
+</md-list>
+
+<md-divider></md-divider>
+
+<md-list class="servers">
+    <md-subheader class="md-no-sticky">
+        <span translate="QUICKPANEL.APP_SERVERS">Application Servers</span>
+    </md-subheader>
+
+    <md-list-item class="server md-3-line" ng-repeat="server in vm.activities.servers">
+        <md-icon md-font-icon="icon-checkbox-blank-circle" class="s16 status" ng-class="server.status"></md-icon>
+
+        <div class="md-list-item-text">
+            <h3>{{server.location}}</h3>
+            <p>{{server.detail}}</p>
+        </div>
+    </md-list-item>
+</md-list>
+
+<md-divider></md-divider>
+
+<md-list class="stats">
+    <md-subheader class="md-no-sticky">
+        <span translate="QUICKPANEL.USER_STATS">User Stats</span>
+    </md-subheader>
+
+    <md-list-item class="stat md-2-line" ng-repeat="stat in vm.activities.stats">
+        <div class="md-list-item-text">
+            <span>{{stat.title}} ({{stat.current}} / {{stat.total}})</span>
+            <md-progress-linear ng-class="stat.status" md-mode="determinate"
+                                value="{{stat.percent}}"></md-progress-linear>
+        </div>
+    </md-list-item>
+</md-list>
